@@ -1,12 +1,37 @@
-import tweepy
-import config
-import math
 import json
+import math
+from functools import wraps
+from typing import Any, Tuple
+
+import tweepy
+
+import config
+from google.cloud import storage
+from google.oauth2 import service_account
+from myerrors import NotAuthenticated, NotFound
 
 auth = tweepy.OAuthHandler(config.API_key, config.API_secret_key)
 auth.set_access_token(config.access_token, config.access_token_secret)
 
 api = tweepy.API(auth)
+
+
+def retry_on_connection_error(max_retry: int = 3):
+    def decorate_function(function):
+        @wraps(function)
+        def retry(*args, **kwargs):
+            tries = 0
+            while tries < max_retry:
+                try:
+                    return function(*args, **kwargs)
+                except ConnectionError:
+                    tries += 1
+            return function(*args, **kwargs)
+
+        return retry
+
+    return decorate_function
+
 
 
 def load_tekst():
