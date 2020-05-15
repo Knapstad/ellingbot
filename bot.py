@@ -8,6 +8,12 @@ auth.set_access_token(config.access_token, config.access_token_secret)
 api = tweepy.API(auth)
 
 
+def load_tekst():
+    with open("elling.json") as file:
+        tekst = json.load(file)
+    return tekst
+
+
 def post_tweet(message):
     api.update_status(message)
 
