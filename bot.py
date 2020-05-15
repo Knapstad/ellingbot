@@ -32,6 +32,7 @@ def retry_on_connection_error(max_retry: int = 3):
 
     return decorate_function
 
+
 @retry_on_connection_error()
 def load_from_cloud(
     client: "google.cloud.storage.client.Client", blob_name: str, bucket_name: str
@@ -41,6 +42,18 @@ def load_from_cloud(
     return blob.download_as_string()
 
 
+@retry_on_connection_error()
+def save_to_cloud(
+    client: "google.cloud.storage.client.Client",
+    data: list,
+    blob_name: str,
+    bucket_name: str,
+):
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.get_blob(blob_name)
+    if not blob:
+        blob = bucket.blob(blob_name)
+    blob.upload_from_string(str(data))
 
 
 def load_tekst():
