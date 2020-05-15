@@ -14,6 +14,11 @@ def load_tekst():
     return tekst
 
 
+def load_index():
+    with open("index.json") as file:
+        return json.load(file)
+
+
 def post_tweet(message):
     api.update_status(message)
 
