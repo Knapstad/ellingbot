@@ -45,7 +45,7 @@ def load_from_cloud(
 @retry_on_connection_error()
 def save_to_cloud(
     client: "google.cloud.storage.client.Client",
-    data: list,
+    data: Any,
     blob_name: str,
     bucket_name: str,
 ):
@@ -67,7 +67,7 @@ def load_index(client):
 
 
 def save_index(index, client):
-    
+
 
 
 def post_tweet(message):
