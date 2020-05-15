@@ -67,7 +67,7 @@ def load_index(client):
 
 
 def save_index(index, client):
-
+    save_to_cloud(client, index, config.index_blob_name, config.bucket_name)
 
 
 def post_tweet(message):
@@ -116,7 +116,7 @@ def main():
         for i in devide_post(message):
             post_tweet(i)
         index += 1
-        save_index(index)
+        save_index(index, client)
     except Exception as e:
         print(e)
 
