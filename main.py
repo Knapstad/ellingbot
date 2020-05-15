@@ -92,7 +92,7 @@ def devide_post(message):
         return [message]
 
 
-def main():
+def main(*args, **kwargs):
 
     SCOPES = ["https://www.googleapis.com/auth/devstorage.read_write"]
     CREDENTIALS = service_account.Credentials.from_service_account_file(
