@@ -70,8 +70,8 @@ def save_index(index, client):
     save_to_cloud(client, index, config.index_blob_name, config.bucket_name)
 
 
-def post_tweet(message):
-    api.update_status(message)
+def post_tweet(message, reply=None):
+    return api.update_status(message, reply)
 
 
 def devide_post(message):
@@ -113,8 +113,10 @@ def main(*args, **kwargs):
         while message.isupper():
             index += 1
             message += tekst[index]
+        previous_message = None
         for i in devide_post(message):
-            post_tweet(i)
+            previous_message = post_tweet(i, previous_message).id
+
         index += 1
         save_index(index, client)
     except Exception as e:
