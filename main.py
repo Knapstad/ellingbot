@@ -112,7 +112,7 @@ def main(*args, **kwargs):
         message = tekst[index]
         while message.isupper():
             index += 1
-            message += tekst[index]
+            message += tekst[index].strip(" ")
         previous_message = None
         for i in devide_post(message):
             previous_message = post_tweet(i, previous_message).id
