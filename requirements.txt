@@ -15,4 +15,4 @@ google-auth-httplib2==0.0.4
 google-cloud-core==1.6.0
 google-cloud-storage==1.36.0
 google-resumable-media==1.2.0
-googleapis-common-protos==1.52.0
+googleapis-common-protos==1.53.0
